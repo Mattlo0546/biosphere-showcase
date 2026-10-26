@@ -1,0 +1,17 @@
+# Business practice and paper feedback
+
+The Topics page follows Biology's time-first practice flow: mix everything, mix a whole unit, revise one subtopic, or tick several subtopics and combine them. Choose a time budget, short answers/essays/both, and Smart mix/New questions/My mistakes. Smart mix balances coverage of the selected topics with weak answers and fresh questions. History comes from the latest marked attempt at each original case/part, including attempts inside mixed papers. Business does not expose scheduled review until it has dated review states.
+
+Topical papers use current-syllabus Paper 1 and Paper 2 parts by default; she can tick any mix of Papers 1, 2 and 3 in the time sheet (remembered in `@AppStorage("business.mixPapers")`). A Paper 3 always comes whole and is fitted first, and each ticked paper gets at least one question when the time allows. The planner includes any prerequisite calculations, counts case reading once, and skips oversized questions when a smaller complete question fits. If no question fits, it explains the required time. Paper 3 stays available as a complete integrated paper; older questions remain available in the individual-case browser.
+
+Each mixed session saves `business_components` with original case IDs and part labels. Its unique question labels use `case.original-part`, such as `2.b`. The answer key maps these labels back to each original case and its markbands, and retains the exact question-specific markscheme. The generated paper contains each original case followed by lined pages for only the selected questions. Source question/markscheme data is unchanged.
+
+For essays, Hank returns a separate strength/improvement judgement and normalized page rectangles for each sentence's handwritten lines. The app creates `marked.pdf` with standard PDF highlights and comment notes; `completed.pdf` remains unchanged. Clicking a highlight or note opens the sentence and teacher comment beside the paper, with its reading links. Sentence buttons also navigate to the relevant line. Uncertain locations stay available as feedback without guessed highlights. Older saved essays can add locations without regrading or rewriting the student's answer.
+
+Comment numbers live in standard PDF annotation contents because PDFKit strips annotation names when writing a PDF. These numbers keep click navigation stable after reopening or export. New session and sentence fields are optional so existing sessions/results still decode.
+
+## Local development order
+
+Build and run the local desktop preview, exercise the changed flows, then commit and push. A Git push alone does not update the running native app. Local previews can use the debug binary from the tested SwiftPM build, staged into a copy of the existing app bundle with refreshed Resources and its existing signing identity; this avoids the universal release build during iteration. Quit the old preview before swapping bundles, preserve a previous bundle for rollback, and relaunch the same app path. Keep private notes and the update key in the local bundle, outside Git.
+
+Validation for this change: 19 Swift tests cover topic coverage and budgets, prerequisites, current content/format filters, saved component order, distinct source markschemes, legacy decoding, annotation export and original-PDF preservation. Rendered PDFs were inspected. Native app checks exercised two-subtopic paper creation, existing-essay comment placement, page navigation, and direct annotation clicks before Git push.

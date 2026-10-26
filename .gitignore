@@ -1,0 +1,28 @@
+# Python / Swift build output
+.venv/
+__pycache__/
+app/.build/
+app/dist/
+.DS_Store
+
+# IB paper PDFs are copyrighted and large: regenerate locally with pipeline/build_bank.py
+app/Resources/bank/*/papers/
+# Business case pages (same reason): regenerate with pipeline/build_business.py; they ship inside the app build
+app/Resources/bank/business-hl/cases/
+# Economics question pages (same reason): regenerate with pipeline/build_economics.py
+app/Resources/bank/economics-hl/cases/
+app/Resources/bank/economics-hl/markschemes/
+# Personal notes are bundled locally, not checked into Git.
+app/Resources/bank/business-hl/notes.pdf
+# Raw extracted paper + markscheme text (regenerate with pipeline/segment.py)
+pipeline/work/*/packets/
+*.log
+
+# Public showcase: the question bank, exam packs and labelling work are built from IB papers and markschemes,
+# so they stay out of this repo. Generate them locally with pipeline/.
+app/Resources/bank/
+app/Resources/exam/
+pipeline/work/
+bank/
+pipeline/business_labels.py
+pipeline/economics_labels.py
